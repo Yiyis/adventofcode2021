@@ -1,12 +1,13 @@
 var fs = require("fs");
-var text = fs.readFileSync("./sampleinput.txt").toString('utf-8');
+var text = fs.readFileSync("./input.txt").toString('utf-8');
 var array = text
   .split("\n")
   .filter((x) => Boolean(x));
 
 var new_array = [];
-var text_array = [];
-var another_array = [];
+var singular_array = [];
+var gamma_array = [];
+var epsilon_array = [];
 
 for (var i = 0; i < array.length; i++) {
  new_array[i] = array[i].toString().split('');
@@ -17,7 +18,7 @@ var single_length = new_array[0].length;
 const res = new_array.map(x => x.map(a => a[0])).flat(2);
 
 for (var i = 0; i < single_length; i++) {
- text_array[i] = res.filter((element, index) => {
+ singular_array[i] = res.filter((element, index) => {
    return index % single_length === i;
  })
 }
@@ -30,11 +31,16 @@ function mode(arr){
     ).pop();
 }
 
-for (var i = 0; i < text_array.length; i++) {
- another_array[i]=mode(text_array[i])
+for (var i = 0; i < singular_array.length; i++) {
+ gamma_array[i]=mode(singular_array[i])
 }
 
-var gamma_rate = another_array.join("");
+var gamma_rate = gamma_array.join("");
 
+for (var i = 0; i < gamma_array.length; i++) {
+ epsilon_array[i] = 1 - parseInt(gamma_array[i]);
+}
 
-console.log(gamma_rate);
+var epsilon_rate = epsilon_array.join("");
+
+console.log(parseInt(gamma_rate, 2)*parseInt(epsilon_rate, 2));
