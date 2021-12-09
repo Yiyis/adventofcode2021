@@ -5,12 +5,8 @@ var array = text
   .filter((x) => Boolean(x));
 
 var new_array = [];
-var row_1 = [];
-var row_2 = [];
-var row_3 = [];
-var row_4 = [];
-var row_5 = [];
-
+var text_array = [];
+var another_array = [];
 
 for (var i = 0; i < array.length; i++) {
  new_array[i] = array[i].toString().split('');
@@ -18,15 +14,14 @@ for (var i = 0; i < array.length; i++) {
 
 var single_length = new_array[0].length;
 
-for (var i = 0; i < new_array.length; i++) {
-  row_1[i] = new_array[i][0];
-  row_2[i] = new_array[i][1];
-  row_3[i] = new_array[i][2];
-  row_4[i] = new_array[i][3];
-  row_5[i] = new_array[i][4];
-  // for (var j = 0; j < single_length; j++) {
-  // }
+const res = new_array.map(x => x.map(a => a[0])).flat(2);
+
+for (var i = 0; i < single_length; i++) {
+ text_array[i] = res.filter((element, index) => {
+   return index % single_length === i;
+ })
 }
+
 
 function mode(arr){
     return arr.sort((a,b) =>
@@ -35,7 +30,11 @@ function mode(arr){
     ).pop();
 }
 
-var gamma_rate = mode(row_1) + mode(row_2) + mode(row_3)+ mode(row_4)+  mode(row_5);
+for (var i = 0; i < text_array.length; i++) {
+ another_array[i]=mode(text_array[i])
+}
+
+var gamma_rate = another_array.join("");
 
 
 console.log(gamma_rate);
